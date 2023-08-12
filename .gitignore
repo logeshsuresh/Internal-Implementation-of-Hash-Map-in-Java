@@ -29,3 +29,7 @@ bin/
 .DS_Store
 
 .idea
+
+Main.class 
+CustomMap.class
+CustomMap$MapNode.class
