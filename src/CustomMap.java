@@ -49,6 +49,32 @@ public class CustomMap <K,V> {
         head = bucket.get(bucketIndex);
         newEntry.next = head;
         bucket.set(bucketIndex, newEntry);
+
+        double loadFactor = (1.0 * size) / capacity;
+
+        System.out.println("Inserting key " + key);
+        System.out.println("Load Factor:" + loadFactor);
+        if (loadFactor > 0.7) {
+            rehash();
+        }
+    }
+
+    private void rehash() {
+        System.out.println("Rehashing buckets");
+        List<MapNode<K, V>> temp = bucket;
+        bucket = new ArrayList<>();
+        capacity *= 2;
+        for(int i = 0; i < capacity; i++) {
+            bucket.add(null);
+        }
+        size = 0;
+        for(int i = 0; i < temp.size(); i++) {
+            MapNode<K, V> head = temp.get(i);
+            while( head != null) {
+                put(head.key, head.value);
+                head = head.next;
+            }
+        }
     }
 
     public void remove(K key) {
@@ -70,6 +96,8 @@ public class CustomMap <K,V> {
             head = head.next;
         }
     }
+
+
     private class MapNode <K, V> {
         K key;
         V value;

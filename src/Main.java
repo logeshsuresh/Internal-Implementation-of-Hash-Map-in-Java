@@ -11,6 +11,5 @@ public class Main {
         System.out.println(nameToLen.get(6));
         System.out.println(nameToLen.get(2));
         System.out.println(nameToLen.get(3));
-
     }
 }
